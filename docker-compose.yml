@@ -1,0 +1,27 @@
+version: "3.7"
+services:
+  webapp:
+    image: webapp:1
+    restart: always
+    build:
+      context: .
+      dockerfile: ./docker/java.Dockerfile
+    ports:
+      - "80:8080"
+    depends_on:
+      - db
+      - redis
+  redis:
+    image: redis
+    restart: always
+  db:
+    image: mysql:1
+    build:
+      context: .
+      dockerfile: ./docker/mysql.Dockerfile
+    restart: always
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+      MYSQL_DATABASE: urlshortener
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: docker
