@@ -12,6 +12,6 @@ import com.mcwilliams.urlshortener.model.jpa.URLFull;;
 @Repository
 public interface URLFullRepo extends CrudRepository<URLFull, String> {
 	@Query("FROM URLFull a WHERE a.fullUrl=:url")
-    Optional<URLFull> getHashByURL(@Param("url") String url);
-	
+	Optional<URLFull> getHashByURL(@Param("url") String url);
+
 }

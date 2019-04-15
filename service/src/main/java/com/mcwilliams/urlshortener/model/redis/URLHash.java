@@ -7,18 +7,20 @@ import org.springframework.data.redis.core.RedisHash;
 
 @RedisHash("UrlHash")
 public class URLHash implements Serializable {
-
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	private String urlHash;
 	private String fullUrl;
 
-	public URLHash() {}
-	
+	public URLHash() {
+	}
+
 	public URLHash(String fullUrl, String urlHash) {
 		this.fullUrl = fullUrl;
 		this.urlHash = urlHash;
 	}
-	
+
 	public String getFullUrl() {
 		return fullUrl;
 	}

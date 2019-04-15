@@ -63,6 +63,6 @@ public class URLDaoTest {
 	@Test
 	public void testGetURLFromHash404() {
 		String testUrl2 = dao.getURLFromHash(this.DOESNT_EXIST);
-		assert(testUrl2.equals("404"));
+		assert(testUrl2.equals("/404"));
 	}
 }
