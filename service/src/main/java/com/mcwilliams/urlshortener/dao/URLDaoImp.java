@@ -21,7 +21,7 @@ public class URLDaoImp implements URLDao {
 	private URLHash fourOhFour;
 	
 	public URLDaoImp() {
-		this.fourOhFour = new URLHash("/404","00000");
+		this.fourOhFour = new URLHash("404","00000");
 	}
 	
 	@Override
