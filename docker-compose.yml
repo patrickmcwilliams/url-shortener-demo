@@ -6,11 +6,15 @@ services:
     build:
       context: .
       dockerfile: ./docker/java.Dockerfile
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/urlshortener?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+      - SPRING_DATASOURCE_USERNAME=docker
+      - SPRING_DATASOURCE_PASSWORD=docker
     ports:
       - "80:8080"
     depends_on:
-      - db
       - redis
+      - db
   redis:
     image: redis
     restart: always
@@ -19,9 +23,16 @@ services:
     build:
       context: .
       dockerfile: ./docker/mysql.Dockerfile
+    command: --default-authentication-plugin=mysql_native_password
+    healthcheck:
+      test: mysql --protocol=socket -hlocalhost -u'docker' -p'docker' -e 'SELECT 1'
     restart: always
+    volumes:
+      - my-datavolume:/var/lib/mysql
     environment:
       MYSQL_RANDOM_ROOT_PASSWORD: "yes"
       MYSQL_DATABASE: urlshortener
       MYSQL_USER: docker
       MYSQL_PASSWORD: docker
+volumes:
+  my-datavolume:
